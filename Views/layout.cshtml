@@ -1,0 +1,43 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@{
+    Layout = null;
+
+    var textColor = Model.GetProperty("textColor")?.GetValue() ?? "#433F3E";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Umbraco Basic Site</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<style>
+    body {
+        color: @textColor;
+    }
+    .header-custom, .header-custom a.nav-link, .header-custom .navbar-brand {
+        color: @textColor !important;
+        opacity: 1 !important;
+    }
+    .header-custom .nav-link:hover {
+        color: @textColor !important;
+        text-decoration: underline;
+    }
+</style>
+<body>
+    @await Html.PartialAsync("_header")
+
+    <div class="container">
+        @RenderBody()
+    </div>
+
+    @await Html.PartialAsync("_footer")
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

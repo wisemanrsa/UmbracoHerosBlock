@@ -1,0 +1,11 @@
+﻿@{
+    var bgColor = Model.GetProperty("footerBackground")?.GetValue() ?? "#F0ECEB";
+
+    var footerText = Model.GetProperty("copyrightsText")?.GetValue() ?? "All rights reserved.";
+}
+
+<footer class="text-center text-lg-start mt-5" style="background-color:@bgColor">
+    <div class="container p-4">
+        <p class="text-center">© @footerText</p>
+    </div>
+</footer>

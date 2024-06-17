@@ -1,0 +1,81 @@
+﻿@model UmbracoHerosBlock.Core.Models.HeroBlockViewModel
+
+@{
+    if (Model.HeroCtaBlock == null && Model.HeroBlock == null)
+        return;
+
+    var isHeroCta = Model.HeroCtaBlock != null;
+    string? imageUrl;
+    string? title;
+    string? description;
+
+    if (isHeroCta)
+    {
+        imageUrl = Model.HeroCtaBlock?.Image?.MediaUrl();
+        title = Model.HeroCtaBlock?.Title;
+        description = Model.HeroCtaBlock?.Description;
+    }
+    else
+    {
+        imageUrl = Model.HeroBlock?.Image?.MediaUrl();
+        title = Model.HeroBlock?.Title;
+        description = Model.HeroBlock?.Description;
+    }
+}
+
+<div class="profile-card">
+    @if (!string.IsNullOrEmpty(imageUrl))
+    {
+        <div class="profile-image">
+            <img src="@imageUrl" alt="Profile Image" />
+        </div>
+    }
+    <div class="profile-content">
+        <h2 class="profile-title">@title</h2>
+        <p class="profile-description">@description</p>
+        @if (isHeroCta && Model.HeroCtaBlock.PrimaryCallToAction.Any())
+        {
+            var url = Model.HeroCtaBlock.PrimaryCallToAction.First().Url;
+            <a href="@url">Check this out</a>
+        }
+    </div>
+</div>
+
+<style>
+    .profile-card {
+        display: flex;
+        align-items: center;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 20px;
+        max-width: 400px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin: 10px;
+    }
+
+    .profile-image {
+        margin-right: 20px;
+    }
+
+        .profile-image img {
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+        }
+
+    .profile-content {
+        flex: 1;
+    }
+
+    .profile-title {
+        margin: 0 0 10px;
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    .profile-description {
+        margin: 0;
+        color: #666;
+    }
+</style>

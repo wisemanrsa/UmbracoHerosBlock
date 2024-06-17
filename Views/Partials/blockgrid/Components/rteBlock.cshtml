@@ -1,0 +1,11 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
+
+@using UmbracoHerosBlock.Core.UmbracoModels
+
+@{
+    var content = (RteBlock)Model.Content;
+}
+
+<div style="margin: 10px; padding: 10px">
+    @content.Content
+</div>

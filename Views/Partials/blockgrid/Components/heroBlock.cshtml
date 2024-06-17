@@ -1,0 +1,11 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
+
+@using UmbracoHerosBlock.Core.UmbracoModels
+@using UmbracoHerosBlock.Core.Models
+
+@{
+    var content = (HeroBlock)Model.Content;
+    var vm = new HeroBlockViewModel { HeroBlock = content };
+}
+
+@await Component.InvokeAsync("HeroBlock", vm)

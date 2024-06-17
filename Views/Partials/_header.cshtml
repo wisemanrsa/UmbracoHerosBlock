@@ -1,0 +1,28 @@
+﻿@inherits UmbracoViewPage
+@{
+    var bgColor = Model.GetProperty("headerBackground")?.GetValue() ?? "#F0ECEB";
+
+    var headerText = Model.GetProperty("headerText")?.GetValue() ?? $"Heros' {Model.Name}";
+
+    var selection = Umbraco.ContentAtRoot().FirstOrDefault()
+        ?.Children()
+        .Where(x => x.IsVisible()) ?? new List<IPublishedContent>();
+}
+<header class="header-custom">
+    <nav class="navbar navbar-expand-lg" style="background-color: @bgColor">
+        <a class="navbar-brand" href="/">@headerText</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                @foreach (var item in selection)
+                {
+                    <li class="nav-item">
+                        <a href="@item.Url()" class="nav-link">@item.Name()</a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </nav>
+</header>
